@@ -1,5 +1,11 @@
 package models;
 
+/**
+ * Modelklasse voor één factuur in de applicatie.
+ * Bevat alle kerngegevens die nodig zijn om een factuur op te slaan:
+ * datum, klantnaam, klantemail, omschrijving en het bedrag.
+ * Wordt gebruikt door de services voor opslag, ophalen en verwerking.
+ */
 public class Invoice {
     private String date;
     private String customerName;
