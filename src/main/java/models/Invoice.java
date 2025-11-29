@@ -12,6 +12,7 @@ public class Invoice {
     private String customerEmail;
     private String description;
     private double amount;
+    private double vatRate;
 
     public String getDate() {
         return date;
@@ -53,11 +54,24 @@ public class Invoice {
         this.amount = amount;
     }
 
-    public Invoice(String date, String customerName, String customerEmail, String description, double amount) {
+    public double getVatRate() {
+        return vatRate;
+    }
+
+    public void setVatRate(double vatRate) {
+        this.vatRate = vatRate;
+    }
+
+    public double getTotalAmount() {
+        return amount + (amount * vatRate);
+    }
+
+    public Invoice(String date, String customerName, String customerEmail, String description, double amount, double vatRate) {
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.description = description;
         this.amount = amount;
+        this.vatRate = vatRate;
     }
 }
