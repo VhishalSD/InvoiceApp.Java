@@ -2,6 +2,7 @@ package services;
 
 import models.Invoice;
 import java.util.ArrayList;
+import storage.InvoiceStorage;
 
 
 /**
@@ -10,10 +11,17 @@ import java.util.ArrayList;
  */
 public class InvoiceService {
 
+    private InvoiceStorage storage = new InvoiceStorage();
     private ArrayList<Invoice> invoices = new ArrayList<>();
+
+    public InvoiceService() {
+        this.invoices = storage.loadInvoices();
+        if (this.invoices == null) this.invoices = new ArrayList<>();
+    }
 
     public void addInvoice(Invoice invoice) {
         invoices.add(invoice);
+        storage.saveInvoices(invoices);
     }
 
     public ArrayList<Invoice> getAllInvoices() {
@@ -36,6 +44,7 @@ public class InvoiceService {
                 invoice.setDate(newDate);
                 invoice.setDescription(newDescription);
                 invoice.setAmount(newAmount);
+                storage.saveInvoices(invoices);
                 return true;
             }
         }
@@ -46,10 +55,10 @@ public class InvoiceService {
         for (Invoice invoice : invoices) {
             if (invoice.getCustomerName().equalsIgnoreCase(customerName)) {
                 invoices.remove(invoice);
+                storage.saveInvoices(invoices);
                 return true;
             }
         }
         return false;
     }
 }
-

@@ -16,6 +16,8 @@ public class Main {
             System.out.println("2. Factuur zoeken");
             System.out.println("3. Alle facturen tonen");
             System.out.println("4. Afsluiten");
+            System.out.println("5. Factuur bewerken");
+            System.out.println("6. Factuur verwijderen");
             System.out.print("Kies een optie: ");
 
             int choice = scanner.nextInt();
@@ -41,9 +43,10 @@ public class Main {
                     scanner.nextLine(); // Enter fix
 
                     System.out.print("VAT percentage (bijv. 0.21 voor 21%): ");
-                    double vatRate = scanner.nextDouble();
+                    String vatInput = scanner.next();
+                    double vat = Double.parseDouble(vatInput.replace(",", "."));
                     scanner.nextLine(); // Enter fix
-                    Invoice invoice = new Invoice(date, customerName, customerEmail, description, amount, vatRate);
+                    Invoice invoice = new Invoice(date, customerName, customerEmail, description, amount, vat);
                     service.addInvoice(invoice);
                     System.out.println("Factuur succesvol toegevoegd!");
                     break;
