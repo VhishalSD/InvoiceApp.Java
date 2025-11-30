@@ -13,6 +13,9 @@ public class Invoice {
     private String description;
     private double amount;
     private double vatRate;
+    private String invoiceNumber;
+    private int quantity;
+    private double pricePerUnit;
 
     public String getDate() {
         return date;
@@ -62,16 +65,44 @@ public class Invoice {
         this.vatRate = vatRate;
     }
 
-    public double getTotalAmount() {
-        return amount + (amount * vatRate);
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public Invoice(String date, String customerName, String customerEmail, String description, double amount, double vatRate) {
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
+
+    public double getTotalAmount() {
+        double base = quantity * pricePerUnit;
+        return base + (base * vatRate);
+    }
+
+    public Invoice(String date, String customerName, String customerEmail, String description, double amount, double vatRate, String invoiceNumber, int quantity, double pricePerUnit) {
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.description = description;
         this.amount = amount;
         this.vatRate = vatRate;
+        this.invoiceNumber = invoiceNumber;
+        this.quantity = quantity;
+        this.pricePerUnit = pricePerUnit;
     }
 }

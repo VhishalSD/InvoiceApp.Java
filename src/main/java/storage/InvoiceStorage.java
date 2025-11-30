@@ -25,9 +25,21 @@ public class InvoiceStorage {
     public ArrayList<Invoice> loadInvoices() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<ArrayList<Invoice>>() {}.getType();
-            return gson.fromJson(reader, listType);
+            ArrayList<Invoice> loaded = gson.fromJson(reader, listType);
+
+            // Als JSON bestaat maar null teruggeeft → leeg nieuw bestand maken
+            if (loaded == null) {
+                loaded = new ArrayList<>();
+                saveInvoices(loaded);
+            }
+
+            return loaded;
+
         } catch (Exception e) {
-            return new ArrayList<>();
+            // Als bestand ontbreekt of beschadigd is → herstellen met lege lijst
+            ArrayList<Invoice> empty = new ArrayList<>();
+            saveInvoices(empty);
+            return empty;
         }
     }
 }
