@@ -1,0 +1,26 @@
+/* ============================================================
+   LIGHT THEMA (standaard)
+   Variabelen voor de lichte modus.
+   ============================================================ */
+:root {
+    --achtergrond-kleur: #ffffff;
+    --tekst-kleur: #1f1f1f;
+    --kaart-kleur: #f2f2f2;
+    --accent-kleur: #00bfff;
+    --kaart-border: rgba(0, 132, 255, 0.3);
+}
+
+/* Forceer de kleuren op de body voor het gekozen thema */
+body {
+    background-color: var(--achtergrond-kleur);
+    color: var(--tekst-kleur);
+}
+
+body[data-theme="dark"] {
+    --achtergrond-kleur: #0f0f0f;
+    --tekst-kleur: #f1f1f1;
+    --kaart-kleur: #1c1c1c;
+    --accent-kleur: #ffb300;
+    --kaart-border: rgba(255, 191, 0, 0.4);
+}
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+        Pagina om een nieuwe factuur toe te voegen.
+        Dit formulier wordt verwerkt door add_invoice.js.
+    -->
+    <title>Factuur toevoegen – InvoiceApp</title>
+
+    <!-- Thema-variabelen (light/dark mode) -->
+    <link rel="stylesheet" href="../css/themes.css">
+
+    <!-- Algemene layout en formulier-styling -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- =================== HEADER =================== -->
+<header>
+    <h1>Factuur toevoegen</h1>
+    <button id="themeToggle">Thema wisselen</button>
+</header>
+
+<!-- =================== NAVIGATIE =================== -->
+<nav>
+    <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="invoices.html">Facturen</a></li>
+        <li><a href="add_invoice.html" class="active">Factuur toevoegen</a></li>
+    </ul>
+</nav>
+
+<!-- =================== FORMULIER =================== -->
+<main>
+
+    <!--
+        Dit formulier verzamelt alle gegevens voor een nieuwe factuur.
+        novalidate zorgt ervoor dat de JS validatie de controle krijgt.
+    -->
+    <form id="addInvoiceForm" novalidate>
+
+        <div class="form-group">
+            <input type="text" id="date" required placeholder=" " />
+            <label for="date">Datum (dd-mm-jjjj)</label>
+            <span id="date-error" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="customerName" required placeholder=" " />
+            <label for="customerName">Klantnaam</label>
+            <span id="customerName-error" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="email" id="customerEmail" required placeholder=" " />
+            <label for="customerEmail">E-mailadres</label>
+            <span id="customerEmail-error" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="description" required placeholder=" " />
+            <label for="description">Omschrijving</label>
+            <span id="description-error" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="number" id="quantity" min="1" required placeholder=" " />
+            <label for="quantity">Aantal</label>
+            <span id="quantity-error" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="number" id="pricePerUnit" step="0.01" min="0.01" required placeholder=" " />
+            <label for="pricePerUnit">Prijs per stuk (€)</label>
+            <span id="pricePerUnit-error" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="number" id="vatRate" step="0.01" min="0" max="1" required placeholder=" " />
+            <label for="vatRate">BTW-tarief (0–1)</label>
+            <span id="vatRate-error" class="error-message"></span>
+        </div>
+
+        <button type="submit">Factuur opslaan</button>
+
+    </form>
+
+</main>
+
+<!-- =================== SCRIPTS =================== -->
+<script src="../js/theme.js"></script>
+<script src="../js/add_invoice.js"></script>
+
+</body>
+</html>

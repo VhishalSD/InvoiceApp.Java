@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Titel van de pagina -->
+    <title>Facturen – InvoiceApp</title>
+
+    <!-- Thema-kleuren (light/dark mode) -->
+    <link rel="stylesheet" href="../css/themes.css">
+
+    <!-- Algemene layout + tabel styling -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- =================== HEADER =================== -->
+<header>
+    <h1>Facturen</h1>
+    <button id="themeToggle">Thema wisselen</button>
+</header>
+
+<!-- =================== NAVIGATIE =================== -->
+<nav>
+    <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="invoices.html" class="active">Facturen</a></li>
+        <li><a href="add_invoice.html">Factuur toevoegen</a></li>
+    </ul>
+</nav>
+
+<!-- =================== FACTUREN-TABEL =================== -->
+<main>
+
+    <!--
+        FACTUREN-TABEL – NEON TECH 3D STYLE
+        De tabelstructuur staat vast in HTML.
+        De inhoud (rijen) wordt dynamisch geplaatst door invoices.js.
+        De tabel staat in een .card container voor 3D-effect en glow.
+    -->
+    <div class="card">
+
+        <table id="invoicesTable">
+            <thead>
+            <tr>
+                <th>Factuurnummer</th>
+                <th>Klantnaam</th>
+                <th>Omschrijving</th>
+                <th>Datum</th>
+                <th>Totaalbedrag</th>
+                <th>Acties</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <!-- JS plaatst hier de factuur-rijen.
+                 Knoppen worden in invoices.js gevuld met:
+                 <button class="editBtn">Bewerken</button>
+                 <button class="deleteBtn">Verwijderen</button>
+            -->
+            </tbody>
+        </table>
+
+    </div>
+
+</main>
+
+<!-- =================== JAVASCRIPT =================== -->
+<script src="../js/theme.js"></script>
+<script src="../js/invoices.js"></script>
+<!-- Universele Custom Modal -->
+<div id="customModal" class="modal-overlay">
+    <div class="modal-content card">
+        <h3 id="modalTitle">Melding</h3>
+        <p id="modalMessage">Bericht komt hier...</p>
+        <div class="modal-buttons" id="modalButtons">
+            <!-- Knoppen worden dynamisch gegenereerd door JS -->
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

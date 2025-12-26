@@ -1,0 +1,630 @@
+/* ============================================================================
+   ALGEMENE RESET
+   Verwijdert standaardmarges en -opmaak van browsers.
+   Dit zorgt voor consistente weergave op alle apparaten.
+   ============================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================================================
+   BODY-STYLING
+   De kleuren worden bepaald door CSS-variabelen in themes.css.
+   Dit zorgt voor directe ondersteuning van light/dark mode.
+   ============================================================================ */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--achtergrond-kleur) !important;
+    color: var(--tekst-kleur) !important;
+    line-height: 1.6;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================================
+   HEADER
+   Bevat de titel van de app en de thema-wisselknop.
+   Flexbox zorgt voor nette uitlijning.
+   ============================================================================ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#themeToggle {
+    /* 1. Maak de knop een flex-container voor de tekst */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 2. Geef de knop genoeg ruimte voor de tekst */
+    padding: 8px 25px;
+    min-width: 160px;
+    height: 40px;
+
+    background: var(--kaart-kleur);
+    border: 2px solid var(--kaart-border);
+    color: var(--tekst-kleur);
+    opacity: 0.6;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden; /* Zorgt dat de 'gloed' binnenboord blijft */
+}
+
+/* 3. Het bolletje dat aangeeft welk thema actief is */
+#themeToggle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background: var(--accent-kleur);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 0;
+    opacity: 0.3; /* Maak hem subtieler zodat de tekst leesbaar blijft */
+}
+
+/* 4. Schuif het bolletje naar rechts in Dark Mode */
+body[data-theme="dark"] #themeToggle::after {
+    left: calc(100% - 34px);
+    opacity: 0.5;
+}
+
+body[data-theme="dark"] #themeToggle {
+    border-color: var(--accent-kleur);
+}
+/* ============================================================================
+   NAVIGATIEBALK
+   Een horizontale navigatie met simpele styling.
+   De accentkleur wordt gebruikt voor hover-effecten.
+   ============================================================================ */
+nav ul {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    list-style: none;
+    padding: 14px 24px;
+    background: var(--kaart-kleur);
+    border-radius: 14px;
+
+    /* 3D shadow stack */
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.18),
+        0 3px 8px rgba(0,0,0,0.12),
+        0 0 10px var(--kaart-border);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+nav ul:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 12px 24px rgba(0,0,0,0.25),
+        0 4px 12px rgba(0,0,0,0.15),
+        0 0 14px var(--accent-kleur);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--tekst-kleur);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.25s ease;
+}
+
+nav a:hover {
+    color: var(--accent-kleur);
+}
+
+/* Neon underline glow */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 3px;
+    background: var(--accent-kleur);
+    border-radius: 4px;
+    box-shadow: 0 0 8px var(--accent-kleur);
+    transition: width 0.25s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ============================================================================
+   ACTIEVE NAVIGATIELINK – NEON GLOW INDICATOR
+   Zorgt dat de huidige pagina visueel gemarkeerd wordt.
+   ============================================================================ */
+
+nav a.active {
+    color: var(--accent-kleur);
+    font-weight: 700;
+}
+
+/* Glow-underline blijft permanent zichtbaar bij actieve pagina */
+nav a.active::after {
+    width: 100%;
+    background: var(--accent-kleur);
+    box-shadow: 0 0 10px var(--accent-kleur);
+}
+
+/* ============================================================================
+   DASHBOARD-CARDS
+   Basisblokken voor informatieweergave.
+   Kaarten passen zich automatisch aan het thema aan.
+   ============================================================================ */
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+/* ============================================================================
+   FORMULIER-STYLING – NEON TECH FLOATING LABELS
+   Moderne invoervelden met zwevende labels, glow-effecten en 3D diepte.
+   Deze stijl maakt formulieren consistent met het Neon-Tech thema.
+   ============================================================================ */
+
+.form-group {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+/* Baseline input styling */
+.form-group input {
+    width: 100%;
+    padding: 14px 12px;
+    background: var(--kaart-kleur);
+    color: var(--tekst-kleur);
+    border: 1px solid var(--kaart-border);
+    border-radius: 10px;
+
+    /* 3D + glow effect */
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.15),
+        0 0 8px var(--kaart-border);
+
+    transition: border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                transform 0.25s ease;
+}
+
+/* Input hover: lichte lift + extra glow */
+.form-group input:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 14px rgba(0,0,0,0.20),
+        0 0 10px var(--accent-kleur);
+}
+
+/* Focus state: sterke neon glow */
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-kleur);
+    box-shadow:
+        0 0 12px var(--accent-kleur),
+        0 8px 18px rgba(0,0,0,0.25);
+}
+
+/* Floating label basis */
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    color: var(--tekst-kleur);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    background: transparent;
+}
+
+/* Label zweeft omhoog zodra input aandacht krijgt of waarde heeft */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: -8px;
+    left: 10px;
+    padding: 0 6px;
+    font-size: 12px;
+    opacity: 1;
+    background: var(--kaart-kleur);
+    border-radius: 4px;
+
+    /* accent glow rond label */
+    box-shadow: 0 0 6px var(--kaart-border);
+}
+
+/* Knoppen onderaan formulieren */
+button[type="submit"] {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--accent-kleur);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 12px var(--accent-kleur),
+        0 10px 20px rgba(0,0,0,0.3);
+}
+
+.card:has(table):hover {
+    transform: none; /* Geen lift-effect op de container, alleen op de rijen */
+}
+
+/* Specifieke aanpassing voor kaarten die een tabel bevatten */
+.card:has(table) {
+   padding: 10px; /* Minder padding zodat de tabel de ruimte heeft */
+   background: transparent; /* Verwijder achtergrond van de kaart zelf */
+   box-shadow: none; /* Verwijder dubbele schaduw */
+   border: none;
+}
+
+/* ============================================================================
+   FACTUREN-TABEL – NEON TECH 3D STYLE
+   Moderne tabel met 3D-rijen, hover-glow en neon pill-knoppen.
+   ============================================================================ */
+
+.table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px; /* ruimte tussen rijen voor 3D effect */
+}
+
+thead tr th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--kaart-kleur);
+    color: var(--tekst-kleur);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent-kleur);
+}
+
+tbody tr {
+    background: var(--kaart-kleur);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.15),
+        0 0 8px var(--kaart-border);
+}
+
+tbody tr td {
+    padding: 10px 16px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(0,0,0,0.10);
+}
+
+tbody tr:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.25),
+        0 0 14px var(--accent-kleur);
+}
+
+/* Neon pill-knoppen voor acties in de tabel */
+
+/* Algemene styling voor actie-knoppen (werkt nu overal, ook in modals) */
+.editBtn, .deleteBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px !important;
+    margin: 5px;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent !important;
+}
+
+/* De Blauwe/Gele knop stijl */
+.editBtn {
+    background: rgba(0, 191, 255, 0.1) !important;
+    color: var(--accent-kleur) !important;
+    border-color: var(--accent-kleur) !important;
+}
+
+.editBtn:hover {
+    background: var(--accent-kleur) !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px var(--accent-kleur);
+}
+
+/* De Rode knop stijl */
+.deleteBtn {
+    background: rgba(217, 83, 79, 0.1) !important;
+    color: #ff4d4d !important;
+    border-color: #ff4d4d !important;
+}
+
+.deleteBtn:hover {
+    background: #ff4d4d !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px #ff4d4d;
+}
+
+/* Specifieke fix voor de knoppen in de modal */
+.modal-buttons button {
+    min-width: 120px;
+}
+/* ============================================================================
+   FOOTER
+   Simpele footer onderaan de pagina.
+   ============================================================================ */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   Kleine schermen (mobiel): kaarten full-width, navigatie onder elkaar.
+   ============================================================================ */
+@media (max-width: 600px) {
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #themeToggle {
+        width: 100%;
+    }
+}
+
+/* ============================================================================
+   3D KAART-STYLING
+   Geeft diepte, moderne UI, hover-lift en kleuraccenten.
+   ============================================================================ */
+
+.card {
+    background-color: var(--kaart-kleur);
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+
+    /* 3D schaduw (2 lagen) */
+    box-shadow:
+            0 8px 20px rgba(0, 0, 0, 0.15),
+            0 3px 6px rgba(0, 0, 0, 0.08);
+
+    /* Subtiele glans in light mode */
+    border: 1px solid var(--kaart-border);
+
+    /* Animatie voor hoverlift */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+    /* Shine-overlay voor futuristische glans */
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.12) 50%,
+        transparent 100%
+    );
+    transform: rotate(25deg);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0; /* standaard onzichtbaar */
+}
+
+/* Shine animatie bij hover */
+.card:hover::before {
+    opacity: 1;
+    transform: translateX(40%) rotate(25deg);
+}
+
+/* Hover lift + sterkere schaduw */
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+            0 14px 28px rgba(0, 0, 0, 0.20),
+            0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Tekst spacing */
+.card h2 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ============================================================================
+   HERO LOGO – 220px, CENTRAAL, NEON GLOW (Option B)
+   ============================================================================ */
+
+.hero-logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 50px 0;
+}
+
+.hero-logo {
+    width: 220px;
+    height: auto;
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+/* Light theme logo (blauw + zilver) */
+.logo-light {
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(77,170,247,0.55));
+}
+
+/* Dark theme logo (neon blauw + amber glow) */
+.logo-dark {
+    display: none;
+    filter: drop-shadow(0 0 12px rgba(225,183,86,0.55));
+}
+
+/* Dark theme override */
+body[data-theme="dark"] .logo-light {
+    display: none;
+}
+body[data-theme="dark"] .logo-dark {
+    display: block;
+}
+
+/* Hover-effect met sterke neon glow */
+.hero-logo:hover {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 0 18px var(--accent-kleur));
+}
+
+/* =========================================================================
+   INPUT BACKGROUND FIX (nooit wit)
+   Zorgt dat alle inputs/selects/textareas dezelfde donkere kaartkleur krijgen,
+   ook bij type=date/number en bij browser autofill.
+   ========================================================================= */
+input,
+select,
+textarea {
+    background: var(--kaart-kleur) !important;
+    color: var(--tekst-kleur) !important;
+}
+
+/* Chrome/Safari autofill kan een wit/geel vlak forceren: dit overschrijft dat */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--tekst-kleur) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--kaart-kleur) inset !important;
+    box-shadow: 0 0 0px 1000px var(--kaart-kleur) inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Extra: kalender-icoon en 'spinner' blijven leesbaar in dark mode */
+input[type="date"],
+input[type="number"] {
+    color-scheme: dark;
+}
+
+/* =================== CUSTOM MODAL =================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Toon de overlay als JS een class toevoegt (handig en robuust) */
+.modal-overlay.show,
+.modal-overlay.is-open,
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--kaart-kleur);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid var(--accent-kleur);
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 20px var(--kaart-border);
+}
+
+/* Voorkom dat algemene card-styling de modal beïnvloedt */
+.modal-content.card {
+    background: var(--kaart-kleur) !important;
+    border: 2px solid var(--accent-kleur) !important;
+    box-shadow: 0 0 20px var(--kaart-border) !important;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    min-width: 120px;
+}
+/* ============================================================================
+   VALIDATIE STYLING
+   - Houdt layout netjes (geen verspringende velden)
+   - Laat fouttekst alleen zien als er echt tekst is
+   ============================================================================ */
+.error-message {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 6px;
+    display: block;
+    min-height: 18px; /* reserveer ruimte */
+    font-weight: 600;
+}
+
+/* Alleen zichtbaar wanneer er tekst in staat (ruimte blijft bestaan) */
+.error-message:empty {
+    visibility: hidden;
+}
+
+/* Rood kader voor ongeldige velden */
+input.invalid {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.35) !important;
+    outline: none;
+}
