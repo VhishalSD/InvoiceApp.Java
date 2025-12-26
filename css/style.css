@@ -292,6 +292,31 @@ button[type="submit"]:hover {
     margin-top: 20px;
 }
 
+/* ============================================================================
+   RESPONSIVE TABLE FIX
+   - Zorgt dat brede tabellen op mobiel niet worden afgekapt
+   - De gebruiker kan horizontaal swipen binnen de tabel
+   ============================================================================ */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;              /* swipe/scroll horizontaal */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* soepel scrollen op iOS */
+}
+
+/* Zorg dat de tabel niet "in elkaar klapt" op kleine schermen */
+.table-wrapper table {
+    width: 100%;
+    min-width: 720px; /* dwingt horizontale scroll als scherm smaller is */
+}
+
+/* Voorkom dat kolommen te smal worden door afbreken */
+.table-wrapper th,
+.table-wrapper td {
+    white-space: nowrap;
+}
+
 table {
     width: 100%;
     border-collapse: separate;
@@ -407,6 +432,12 @@ footer {
 
     #themeToggle {
         width: 100%;
+    }
+    /* Tabel op mobiel: iets compacter */
+    .table-wrapper thead tr th,
+    .table-wrapper tbody tr td {
+        padding: 10px 12px;
+        font-size: 13px;
     }
 }
 
