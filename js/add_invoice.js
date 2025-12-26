@@ -1,8 +1,3 @@
-/**
- * FACTUUR TOEVOEGEN – FRONTEND "BACKEND" LOGICA
- * Deze versie is MBO-4 passend: duidelijke validaties + correcte berekening.
- * Opslag: localStorage (array "facturen").
- */
 
 // ============================================================================
 // UNIEKE ID GENERATIE (Collision Detection)
@@ -197,13 +192,17 @@ document.getElementById("addInvoiceForm").addEventListener("submit", function (e
     alleFacturen.push(invoice);
     localStorage.setItem('facturen', JSON.stringify(alleFacturen));
 
-    // Succes modal + redirect
+    // Succes feedback + redirect
+    const titel = "Factuur Opgeslagen";
+    const bericht = `Factuur ${invoice.invoiceNumber} is succesvol opgeslagen.`;
+
     window.toonBericht(
-        "Factuur Opgeslagen",
-        `Factuur ${invoice.invoiceNumber} is succesvol opgeslagen.`,
+        titel,
+        bericht,
         false,
         () => {
             window.location.href = "invoices.html";
         }
     );
+
 });
